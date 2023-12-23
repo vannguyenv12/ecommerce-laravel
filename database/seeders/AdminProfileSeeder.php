@@ -18,6 +18,7 @@ class AdminProfileSeeder extends Seeder
 
         $vender = new Vendor();
         $vender->banner = 'uploads/1234.jpg';
+        $vender->shop_name = 'Admin Shop';
         $vender->phone = '123123';
         $vender->email = 'admin@gmail.com';
         $vender->address = 'USA';

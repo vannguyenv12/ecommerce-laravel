@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\VendorProductImageGalleryController;

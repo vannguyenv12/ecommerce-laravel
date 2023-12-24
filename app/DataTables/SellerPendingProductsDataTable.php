@@ -3,9 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Product;
-use App\Models\SellerProduct;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -14,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SellerProductsDataTable extends DataTable
+class SellerPendingProductsDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -79,7 +77,7 @@ class SellerProductsDataTable extends DataTable
             ->addColumn('approve', function($query) {
                 return "<select class='form-control is_approve' data-id='$query->id'>
                     <option value='0'>Pending</option>
-                    <option selected value='1'>Approve</option>
+                    <option value='1'>Approve</option>
                 </select>";
             })
             ->rawColumns(['image', 'type', 'status', 'action', 'approve'])
@@ -91,9 +89,7 @@ class SellerProductsDataTable extends DataTable
      */
     public function query(Product $model): QueryBuilder
     {
-        return $model->where('vendor_id', '!=', Auth::user()->vendor->id)
-            ->where('is_approved', 1)
-            ->newQuery();
+        return $model->where('is_approved', 0)->newQuery();
     }
 
     /**
@@ -102,11 +98,11 @@ class SellerProductsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('sellerproducts-table')
+                    ->setTableId('sellerpendingproducts-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -124,19 +120,19 @@ class SellerProductsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-                Column::make('id'),
-                Column::make('vendor'),
-                Column::make('image'),
-                Column::make('name'),
-                Column::make('price'),
-                Column::make('type')->width(150),
-                Column::make('status'),
-                Column::make('approve'),
-                Column::computed('action')
-                    ->exportable(false)
-                    ->printable(false)
-                    ->width(200)
-                    ->addClass('text-center'),
+            Column::make('id'),
+            Column::make('vendor'),
+            Column::make('image'),
+            Column::make('name'),
+            Column::make('price'),
+            Column::make('type')->width(150),
+            Column::make('status'),
+            Column::make('approve')->width(100),
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(200)
+                  ->addClass('text-center'),
         ];
     }
 
@@ -145,6 +141,6 @@ class SellerProductsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'SellerProducts_' . date('YmdHis');
+        return 'SellerPendingProducts_' . date('YmdHis');
     }
 }

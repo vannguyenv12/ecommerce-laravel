@@ -1,6 +1,10 @@
 <?php
 
 // Set sidebar item active
+
+use Illuminate\Support\Facades\Session;
+use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
+
 function setActive(array $route) {
     if (is_array($route)) {
         foreach($route as $r) {
@@ -58,4 +62,38 @@ function getCartTotal() {
     }
 
     return $total;
+}
+
+// get payable total amount
+function getMainCartTotal() {
+    if (Session::has('coupon')) {
+        $coupon = Session::get('coupon');
+        $subTotal = getCartTotal();
+        if ($coupon['discount_type'] === 'amount') {
+            $total = $subTotal - $coupon['discount'];
+            return $total;
+        } elseif ($coupon['discount_type'] === 'percent') {
+            $discount = $subTotal - ($subTotal * $coupon['discount'] / 100);
+            $total = $subTotal - $discount;
+            return $total;
+        }
+    } else {
+        return getCartTotal();
+    }
+}
+
+// get cart discount
+function getCartDiscount() {
+    if (Session::has('coupon')) {
+        $coupon = Session::get('coupon');
+        $subTotal = getCartTotal();
+        if ($coupon['discount_type'] === 'amount') {
+            return $coupon['discount'];
+        } elseif ($coupon['discount_type'] === 'percent') {
+            $discount = $subTotal - ($subTotal * $coupon['discount'] / 100);
+            return $discount;
+        }
+    } else {
+        return 0;
+    }
 }

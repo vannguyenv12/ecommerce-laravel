@@ -152,6 +152,7 @@
     <!--main/custom js-->
     <script src="{{asset('frontend/js/main.js')}}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         @if ($errors->any())
@@ -160,7 +161,7 @@
             @endforeach
         @endif
     </script>
-
+    @include('frontend.layouts.scripts')
     @stack('scripts')
 </body>
 

@@ -37,7 +37,7 @@ class PaymentController extends Controller
         $order = new Order();
         $order->invoice_id = rand(1, 999999);
         $order->user_id = Auth::user()->id;
-        $order->sub_total = getMainCartTotal();
+        $order->sub_total = getCartTotal();
         $order->amount = getFinalPayableAmount();
         $order->currency_name = $setting->currency_name;
         $order->currency_icon = $setting->currency_icon;
@@ -47,7 +47,7 @@ class PaymentController extends Controller
         $order->order_address = json_encode(Session::get('address'));
         $order->shipping_method = json_encode(Session::get('shipping_method'));
         $order->coupon = json_encode(Session::get('coupon'));
-        $order->order_status = 0;
+        $order->order_status = 'pending';
         $order->save();
 
         // Store Order Product
@@ -163,7 +163,7 @@ class PaymentController extends Controller
 
         $response = $provider->capturePaymentOrder($request->token);
 
-        if (isset($response['status']) && $response['s  tatus'] === 'COMPLETED') {
+        if (isset($response['status']) && $response['status'] === 'COMPLETED') {
             // calc amount
             $paypalSetting = PaypalSetting::first();
             $total = getFinalPayableAmount();

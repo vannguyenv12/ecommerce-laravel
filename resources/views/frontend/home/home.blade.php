@@ -28,16 +28,25 @@
     <!--============================
        MONTHLY TOP PRODUCT START
     ==============================-->
-        {{-- @include('frontend.home.sections.top-category-product') --}}
+        @include('frontend.home.sections.top-category-product')
     <!--============================
        MONTHLY TOP PRODUCT END
     ==============================-->
 
 
     <!--============================
+        BANNER SLIDER START
+    ==============================-->
+        @include('frontend.home.sections.banner-slider')
+
+    <!--============================
+        BANNER SLIDER END
+    ==============================-->
+
+    <!--============================
         BRAND SLIDER START
     ==============================-->
-        {{-- @include('frontend.home.sections.banner-slider') --}}
+    @include('frontend.home.sections.brand-slider')
 
     <!--============================
         BRAND SLIDER END
@@ -56,7 +65,7 @@
     <!--============================
         HOT DEALS START
     ==============================-->
-        {{-- @include('frontend.home.sections.hot-deals') --}}
+        @include('frontend.home.sections.hot-deals')
     <!--============================
         HOT DEALS END
     ==============================-->
@@ -65,7 +74,7 @@
     <!--============================
         ELECTRONIC PART START
     ==============================-->
-        {{-- @include('frontend.home.sections.category-product-slider-one') --}}
+        @include('frontend.home.sections.category-product-slider-one')
 
     <!--============================
         ELECTRONIC PART END
@@ -74,7 +83,7 @@
     <!--============================
         ELECTRONIC PART START
     ==============================-->
-    {{-- @include('frontend.home.sections.category-product-slider-two') --}}
+    @include('frontend.home.sections.category-product-slider-two')
 
     <!--============================
         ELECTRONIC PART END
@@ -93,7 +102,7 @@
     <!--============================
         WEEKLY BEST ITEM START
     ==============================-->
-        {{-- @include('frontend.home.sections.weekly-best-item') --}}
+        @include('frontend.home.sections.weekly-best-item')
     <!--============================
         WEEKLY BEST ITEM END
     ==============================-->

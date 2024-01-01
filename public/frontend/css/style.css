@@ -9530,3 +9530,10 @@ a:not([href]):not([class]):hover {
 .wsus__cart_list .wsus__pro_name {
     width: 285px !important;
 }
+
+.wsus__pro_det_review .wsus__comment_text ul li {
+    width: 20% !important;
+    height: 20%;
+    margin-right: 10px;
+    float: left;
+}

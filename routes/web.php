@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserOrderController;
@@ -69,6 +70,10 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     // Address
     Route::resource('address', UserAddressController::class);
+
+    // Product Review
+    Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
+    Route::post('review', [ReviewController::class, 'create'])->name('review.create');
 
     // Checkout
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');

@@ -40,8 +40,10 @@ require __DIR__.'/auth.php';
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');
 
-// Product Detail Route
+// Product Route
+Route::get('products', [FrontendProductController::class, 'productsIndex'])->name('products.index');
 Route::get('product-detail/{slug}', [FrontendProductController::class, 'showProduct'])->name('product-detail');
+Route::get('change-product-list-view', [FrontendProductController::class, 'changeListView'])->name('change-product-list-view');
 
 // Cart
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
